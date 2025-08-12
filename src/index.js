@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+function FruitList() {
+  const [Detail, setDetail] = useState(['Founder : SELVAKUMAR']);
+  const [newDetails, setNewDetails] = useState('');
+
+  const addFruit = () => {
+    if (newDetails.trim() !== '') {
+      setDetail([...Detail, newDetails.trim()]);
+      setNewDetails('');
+    }
+  };
+
+  return (
+    <div style={{ textAlign: 'center', marginTop: 50 }}>
+      <h1>Add Member Detail of SKyVision_Technology</h1>
+
+      <ul>
+        {Detail.map((Detail, index) => (
+          <li key={index}>{Detail}</li>
+        ))}
+      </ul>
+
+      <input
+        type="text"
+        placeholder="Enter Name"
+        value={newDetails}
+        onChange={(e) => setNewDetails(e.target.value)}
+      />
+      <button onClick={addFruit}>Add member</button>
+    </div>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render(<FruitList />);
